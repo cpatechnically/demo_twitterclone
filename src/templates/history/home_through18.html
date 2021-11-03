@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+This is amazing!!!!
+{% endblock head_title %}
+
+
+{% block content %}
+Welcome to Tweetme 2
+
+<div id="tweets">
+    Replace me
+</div>
+
+<script>
+const tweetsElement = document.getElementById("tweets") //get an htlm element
+tweets.innerHtml = "Loading..." // set new html in that element
+
+let el1 = "<h1>Hi there 1</h1>"
+let el2 = "<h1>Hi there 2</h1>"
+let el3 = "<h1>Hi there 3</h1>"
+tweetsElement.innerHTML = el1 + el2 + el3
+
+
+const xhr = new XMLHttpRequest()
+const method = 'GET' // "POST"
+const url = "/tweets"
+const responseType = "json"
+
+xhr.responseType = responseType
+xhr.open(method, url)
+xhr.onload = function() {
+    console.log(xhr.response)
+    const serverResponse = xhr.response
+    let listedItems = serverResponse.response
+    let finalTweetStr = ""
+    let i;
+    for (i=0;i<listedItems.length; i++){
+        console.log(i)
+        console.log(listedItems[i])
+        let currentItem = "<div class='mb-4'><h1>" + listedItems[i].id + "</h1>" + "<p>" + listedItems[i].content + "</p></div>"
+            finalTweetStr += currentItem
+    }
+    tweetsElement.innerHTML = finalTweetStr
+    //console.log(listedItems)
+}
+xhr.send()
+
+
+</script>
+
+{% endblock content %}

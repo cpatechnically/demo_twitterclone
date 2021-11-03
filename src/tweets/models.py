@@ -10,6 +10,8 @@ class TweetLike(models.Model):
     tweet = models.ForeignKey("Tweet", on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+
+
 class TweetQuerySet(models.QuerySet):
     def by_username(self, username):
         return self.filter(user__username__iexact=username)
@@ -24,6 +26,7 @@ class TweetQuerySet(models.QuerySet):
             Q(user=user)
         ).distinct().order_by("-timestamp")
 
+
 class TweetManager(models.Manager):
     def get_queryset(self, *args, **kwargs):
         return TweetQuerySet(self.model, using=self._db)
@@ -34,7 +37,7 @@ class TweetManager(models.Manager):
 class Tweet(models.Model):
     # Maps to SQL data
     # id = models.AutoField(primary_key=True)
-    parent = models.ForeignKey("self", null=True, on_delete=models.SET_NULL)
+    parent = models.ForeignKey("self", null=True, on_delete=models.SET_NULL) #DEFAULT is null, the tweet will ONLY have a parent when it is retweeted!
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="tweets") # many users can many tweets
     likes = models.ManyToManyField(User, related_name='tweet_user', blank=True, through=TweetLike)
     content = models.TextField(blank=True, null=True)

@@ -14,14 +14,43 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path,re_path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
-from .views import home_view
+
+from accounts.views import (
+    login_view,
+    logout_view,
+    register_view,
+)
+
+from tweets.views import (
+    home_view,
+    local_tweets_list_view,
+    local_tweets_detail_view,
+    #local_tweets_profile_view
+)
+
 
 urlpatterns = [
-    path('', home_view),
     path('admin/', admin.site.urls),
-    path('tweets/',include('tweets.urls')),
-    path('profiles/',include('profiles.urls')),
-    path('accounts/',include('accounts.urls')),
+    path('', local_tweets_list_view),
+    path('login/', login_view),
+    path('logout/', logout_view),
+    path('register/', register_view),
+    path('<int:tweet_id>', local_tweets_detail_view),
+    re_path(r'profiles?/', include('profiles.urls')),
+    #path('accounts/',include('accounts.urls')),
+    #path('', local_tweets_list_view),
+    #path('global/', tweets_list_view),
+    #path('tweets/', include('tweets.urls')),
+
+    #API
+    #path('api/profiles/', include('profiles.api.urls')),
+    path('api/tweets/',include('tweets.api.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

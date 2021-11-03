@@ -10,21 +10,26 @@ class TweetActionSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     action = serializers.CharField()
     content = serializers.CharField(allow_blank=True, required=False)
+    
 
     def validate_action(self, value):
         value = value.lower().strip() # "Like " -> "like"
+        print(f"\nCALLED tweet action serializer validate_action \nself {self} value {value} ")
         if not value in TWEET_ACTION_OPTIONS:
             raise serializers.ValidationError("This is not a valid action for tweets")
+        print(f"\nRETURNING value {value}")
         return value
+    
 
 
 class TweetCreateSerializer(serializers.ModelSerializer):
     user = PublicProfileSerializer(source='user.profile', read_only=True) # serializers.SerializerMethodField(read_only=True)
+    #user = serializers.SerializerMethodField(read_only=True)
     likes = serializers.SerializerMethodField(read_only=True)
     
     class Meta:
         model = Tweet
-        fields = ['user', 'id', 'content', 'likes', 'timestamp']
+        fields = ['user','id', 'content', 'likes','timestamp']
     
     def get_likes(self, obj):
         return obj.likes.count()
@@ -40,7 +45,10 @@ class TweetCreateSerializer(serializers.ModelSerializer):
 
 class TweetSerializer(serializers.ModelSerializer):
     user = PublicProfileSerializer(source='user.profile', read_only=True)
+    #user = serializers.SerializerMethodField(read_only=True)
     likes = serializers.SerializerMethodField(read_only=True)
+    #content = serializers.SerializerMethodField(read_only=True)
+    #is_retweet = serializers.SerializerMethodField(read_only=True) #DONT NEED TO CALL serliazerMethod for a property on the object itself.
     parent = TweetCreateSerializer(read_only=True)
     class Meta:
         model = Tweet
@@ -51,7 +59,16 @@ class TweetSerializer(serializers.ModelSerializer):
                 'likes',
                 'is_retweet',
                 'parent',
-                'timestamp']
+                #'timestamp'
+                ]
 
     def get_likes(self, obj):
         return obj.likes.count()
+
+    # def get_user(self,obj):
+    #     return obj.user.id
+    # def get_content(self,obj):
+    #     content = obj.content
+    #     if obj.is_retweet:
+    #         content = obj.parent.content
+    #     return content
