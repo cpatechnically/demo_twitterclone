@@ -1,4 +1,3 @@
-MODULE=""
 #from .base import *
 
 from .production import *
@@ -9,4 +8,5 @@ from .production import *
 # except:
 #     print(f"LOCAL ERRORS...")
 #     pass
-print(f"\nSETTINGS MODULE IS.. {MODULE} \nDATABASES['default'] -> {DATABASES['default']} \nALLOWED_HOSTS {ALLOWED_HOSTS} \nBASE_DIR {BASE_DIR} \nSTATICFILES_DIRS {STATICFILES_DIRS} \nDEBUG {DEBUG}")
+
+print(f"\nSETTINGS MODULE IS.. {MODULE} \nDATABASES['default'] -> {DATABASES['default']} \nALLOWED_HOSTS {ALLOWED_HOSTS} \nBASE_DIR {BASE_DIR} \nSTATICFILES_DIRS {STATICFILES_DIRS} \nDEBUG {DEBUG} \nTEMPLATES {TEMPLATES} ")
