@@ -148,3 +148,6 @@ CORS_ORIGIN_ALLOW_ALL = True # any website has access to my api
 CORS_URLS_REGEX = r'^/api/.*$'
 
 from tweetme2.rest_api.conf import *
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
