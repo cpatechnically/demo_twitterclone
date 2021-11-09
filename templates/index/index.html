@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block base_head %}
+	<link rel='stylesheet' href='{% static "css/index.css" %}' >
+{% endblock %}
+
+{% block pgcontent %}
+<!-- Start Landing Page -->
+
+<div class='row'>
+	<div class='text-center'>
+		<h1>Hello, world we're working!</h1>
+	</div>
+	<div class='col'>
+		<p>{{ content }}</p>
+	</div>
+</div>
+
+{% endblock %}

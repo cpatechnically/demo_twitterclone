@@ -14,7 +14,7 @@ def home_view(request, *args, **kwargs):
     username = None
     if request.user.is_authenticated:
         username = request.user.username
-    template_name = "pages/purejs_home.html"
+    template_name = "apps/tweets/purejs_home.html"
     context = {
         "username":username
     }
@@ -22,21 +22,21 @@ def home_view(request, *args, **kwargs):
     return render(request,template_name,context,status=200)
 
 def local_tweets_list_view(request,*args, **kwargs):
-    template_name = "tweets/list.html"
+    template_name = "apps/tweets/list.html"
     context = {
     }
     #status = 200
     return render(request,template_name,context)
 
 def local_tweets_detail_view(request,tweet_id, *args, **kwargs):
-    template_name = "tweets/detail.html"
+    template_name = "apps/tweets/detail.html"
     context = {
         "tweet_id":tweet_id
     }
     return render(request,template_name,context)
 
 def local_tweets_profile_view(request,username, *args, **kwargs):
-    template_name = "tweets/profile.html"
+    template_name = "apps/tweets/profile.html"
     context = {
         "profile_username":username
     }
@@ -89,7 +89,7 @@ def js_tweets_list_view(request, *args, **kwargs):
 
 def js_tweets_detail_view(request, tweet_id, *args, **kwargs):
     context = {"tweet_id": tweet_id}
-    return render(request, "tweets/detail.html", context)
+    return render(request, "apps/tweets/detail.html", context)
 
 
 

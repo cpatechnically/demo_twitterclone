@@ -13,6 +13,9 @@
 /appsrc/static
 /appsrc/static-root
 /src/static-root
+restapi_course/
+puredjapi/
+djrestapi/
 
 # misc
 .DS_Store

@@ -1,0 +1,27 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  {% include 'base/css.html' %}
+  <title>Hello, world!</title>
+</head>
+<body>
+  {% include 'sections/navbar/nav_search.html' %}
+  
+  <div class="container">
+    {% block content %}{% endblock %}
+  </div>
+
+  <!-- React Javascript -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+
+  <script type='text/babel' src="{% static 'js/app.min.js' %}"></script>
+  </body>
+</html>

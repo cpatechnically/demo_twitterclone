@@ -1,5 +1,6 @@
-const apiUrl = "http://127.0.0.1:8005/api"
-
+import {local_urls,production_urls} from '../config.json';
+const {apiUrl} = local_urls ? local_urls : "http://127.0.0.1:8000/api"
+console.log("apiUrl",apiUrl)
 function getCookie(name) {
   let cookieValue = null;
   if (document.cookie && document.cookie !== '') {

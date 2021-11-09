@@ -1,5 +1,6 @@
 console.log("Start of purjs.js")
-
+import {local_urls,production_urls} from '../config.json';
+let apiUrl = local_urls.apiUrl
 function handleTweetFormError(msg, display){
     var myErrorDiv = document.getElementById("tweet-create-form-error")
     if (display === true) {
@@ -76,8 +77,7 @@ function loadTweets(tweetsElement) {
 
     const xhr = new XMLHttpRequest()
     const method = 'GET' // "POST"
-    const baseurl = "http://127.0.0.1:8005"
-    const url = `${baseurl}/api/tweets`
+    const url = `${apiUrl}/tweets`
     const responseType = "json"
     xhr.responseType = responseType
     xhr.open(method, url)

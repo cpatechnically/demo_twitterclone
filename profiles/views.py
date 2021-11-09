@@ -11,7 +11,7 @@ from .forms import (
 
 # Create your views here.
 def profile_detail_view(request,username, *args, **kwargs):
-    template_name = "profiles/detail.html"
+    template_name = "apps/profiles/detail.html"
     #get profile for the passed in username
     qs = Profile.objects.filter(user__username=username)
     if not qs.exists():
@@ -26,7 +26,7 @@ def profile_detail_view(request,username, *args, **kwargs):
 
 
 def profile_update_view(request, *args, **kwargs):
-    template_name = "profiles/form.html"
+    template_name = "apps/profiles/form.html"
     #get profile for the passed in username
     if not request.user.is_authenticated:
         return redirect("/login?next=/profile/update")

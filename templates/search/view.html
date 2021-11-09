@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+
+{% block pgcontent %}
+<div class='row mb-3'>
+    {% if query %}
+    <div class='col-12' >
+        Results for <b>{{ query }}</b>
+        <hr/>
+    </div>
+    {% else %}
+
+    <div class='col-12 col-md-6 mx-auto py-5'>
+       {% include 'apps/search/snippets/search-form.html' %}
+
+    </div>
+    <div class='col-12'>
+        <hr>
+    </div>
+    {% endif %}
+</div>
+
+<div class="row col-9 mb-3">
+    <div class="col">
+        <p>Total Items {{paginator.count}} / Pg {{paginator.num_pages}}</p>
+        <p>Total Pages {{page_obj.num_pages}} / Current Pg {{page_number}}</p>
+        <p>It is important to log the courses you take for many reasons...</p>
+    </div>
+</div>
+<div class="row py-2 mb-3">
+    {% for obj in object_list %}
+        {% include 'apps/demo/snippets/demo-card.html' with instance=obj %}
+    {% endfor %}
+</div>
+<div class="row ">
+    <div class="col-9 col-md-7 mx-auto py-2">
+        {% include 'sections/block/pagination.html' with page_obj=page_obj is_paginated=is_paginated paginator=paginator%}
+    </div>
+</div>
+
+{% endblock %}

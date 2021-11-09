@@ -1,0 +1,71 @@
+{% load static %}
+{% url 'index' as home_url %}
+{% url 'localconfig:home' as localconfig_url %}
+{% url 'tweets:home' as tweets_url %}
+{% url 'profile:home' as profile_url %}
+{% url 'update:home' as update_url %}
+{% url 'search:query' as search_url %}
+{% url 'accounts:logout' as logout_url %}
+{% url 'accounts:login' as login_url %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+  <a class="navbar-brand" href="{{ home_url }}">
+    <img src="{% static 'img/rjsdemos-logo.png' %}" class="d-inline-block align-top" alt=""/>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+      {% if request.user.is_authenticated %}
+      <li class="nav-item {% if request.path == localconfig_url %}active{% endif %}">
+        <a class="nav-link" href="{{ localconfig_url }}">LocalConfig </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Tweets</a>
+        <ul class="dropdown-menu">
+          <li class="{% if request.path == survey_url %}active{% endif %}">
+            <a class="nav-link" href="{{ tweets_url }}">Tweets</a>
+          </li>
+          <li class="nav-item {% if request.path == cfetryreact_url %}active{% endif %}">
+            <a class="nav-link" href="{{ profile_url }}">Tweets Profile </a>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Django Api</a>
+        <ul class="dropdown-menu">
+          <li class="nav-item {% if request.path == htmlcss_url %}active{% endif %}">
+            <a class="nav-link" href="{{ update_url }}">Update App</a>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Account</a>
+        <ul class="dropdown-menu">
+          <li class="nav-item {% if request.path == account_url %}active{% endif %}">
+            <a class="nav-link" href="{{ profile_url }}">Profile</a>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li class="nav-item {% if request.path == logout_url %}active{% endif %}">
+            <a class="nav-link" href="{{logout_url}}">Logout</a>
+          </li>
+        </ul>
+      </li>
+      {% else %}
+      <li class="nav-item {% if request.path == login_url %}active{% endif %}">
+        <a class="nav-link" href="{{ login_url }}">Signup</a>
+      </li>
+      <li class="nav-item {% if request.path == login_url %}active{% endif %}">
+        <a class="nav-link" href="{{ login_url }}">Login</a>
+      </li>
+      {% endif %}
+      <form class="form-inline ml-auto my-2 my-lg-0">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </ul>
+  </div>
+</nav>

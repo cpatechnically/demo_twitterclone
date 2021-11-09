@@ -6,7 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 # Function based views to Class Based Views
 
 def login_view(request, *args, **kwargs):
-    template_name="accounts/auth.html"
+    template_name="apps/accounts/auth.html"
     form = AuthenticationForm(request, data=request.POST or None)
     if form.is_valid():
         user_ = form.get_user()
@@ -20,7 +20,7 @@ def login_view(request, *args, **kwargs):
     return render(request,template_name,context)
 
 def logout_view(request, *args, **kwargs):
-    template_name="accounts/auth.html"
+    template_name="apps/accounts/auth.html"
     if request.method == "POST":
         logout(request)
         return redirect("/login")

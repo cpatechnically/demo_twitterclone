@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'accounts',
     'rest_framework',
     'corsheaders',
+    'update',
+    'status',
 ]
 
 MIDDLEWARE = [
@@ -134,11 +136,21 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_local_cdn")
 
 
-CORS_ORIGIN_ALLOW_ALL = True # any website has access to my api
+from tweetme2.rest_api.conf import *
+
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_URLS_REGEX = r'^/api/.*$'
 
 
-from tweetme2.rest_api.conf import *
+CORS_REPLACE_HTTPS_REFERER      = False
+HOST_SCHEME                     = "http://"
+SECURE_PROXY_SSL_HEADER         = None
+SECURE_SSL_REDIRECT             = False
+SESSION_COOKIE_SECURE           = False
+CSRF_COOKIE_SECURE              = False
+SECURE_HSTS_SECONDS             = None
+SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
+SECURE_FRAME_DENY               = False
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
